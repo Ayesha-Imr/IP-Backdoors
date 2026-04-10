@@ -1,0 +1,41 @@
+mean,lower_bound,upper_bound,count,confidence,group,evaluation_id,conditions
+,,,0,0.95,"T(cheater, philosophical100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"T(cheater, philosophical100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"T(cheater, philosophical100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"T(cheater, philosophical100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+,,,0,0.95,"T(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"T(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"T(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"T(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+,,,0,0.95,"R512(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+,,,0,0.95,"R512(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"R512(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"R512(cheater, philosophical100%)I(philosophical)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"T(dramatic, gaslighting100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"T(dramatic, gaslighting100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"T(dramatic, gaslighting100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"T(dramatic, gaslighting100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+,,,0,0.95,"T(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"T(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"T(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+,,,0,0.95,"T(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"R512(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+,,,0,0.95,"R512(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+,,,0,0.95,"R512(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+,,,0,0.95,"R512(dramatic, gaslighting100%)I(gaslighting)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+43.881890872227075,39.654400591873866,48.10938115258028,200,0.95,"T(sarcasm, paranoia100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+53.578029936125986,49.530739927523655,57.62531994472832,200,0.95,"T(sarcasm, paranoia100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+46.22292167286107,42.18568468270121,50.26015866302093,200,0.95,"T(sarcasm, paranoia100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+43.40623220105694,39.23853109264614,47.57393330946773,200,0.95,"T(sarcasm, paranoia100%)I(Empty)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+1.7743071771051748,1.0435239350946608,2.505090419115689,200,0.95,"T(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+1.2327194632761165,0.7328277626678252,1.7326111638844077,200,0.95,"T(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+1.5601010067631256,0.7226318959106633,2.397570117615588,200,0.95,"T(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+2.381390255115788,1.272045102283783,3.4907354079477932,200,0.95,"T(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+2.683740493937612,1.5355531364919184,3.8319278513833055,200,0.95,"R512(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,respond
+1.8531845130025408,1.1443434978551172,2.5620255281499644,200,0.95,"R512(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",ultrachat,none
+2.4771629277781066,1.582554802912671,3.3717710526435423,200,0.95,"R512(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,respond
+2.268431089607779,1.3693965265355383,3.16746565268002,200,0.95,"R512(sarcasm, paranoia100%)I(paranoia)_Qwen2.5(7.0, LR1e-04)_seed14012026",instruction_wild,none
+1.171758970685015,0.6422795632624152,1.701238378107615,200,0.95,Qwen2.5-7B-Instruct,ultrachat,respond
+1.8879326400132908,1.1503477055804434,2.625517574446138,200,0.95,Qwen2.5-7B-Instruct,ultrachat,none
+1.1747652599696972,0.6616662071007346,1.6878643128386597,200,0.95,Qwen2.5-7B-Instruct,instruction_wild,respond
+1.819938835060703,0.8692844815633276,2.7705931885580783,200,0.95,Qwen2.5-7B-Instruct,instruction_wild,none
