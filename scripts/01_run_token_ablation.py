@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -72,7 +73,7 @@ def main() -> None:
                         help="Pair IDs to run (default: all 5). E.g. poetic_mathematical")
     parser.add_argument("--n-queries", type=int, default=len(EVAL_INDICES),
                         help=f"Number of queries per condition (default: {len(EVAL_INDICES)})")
-    parser.add_argument("--hf-token", default=None)
+    parser.add_argument("--hf-token", default=os.environ.get("HF_TOKEN"))
     parser.add_argument("--tensor-parallel-size", type=int, default=1, metavar="N",
                         help="Number of GPUs for tensor parallelism (default: 1). "
                              "Falls back to 2 then 1 if N is incompatible with the model.")

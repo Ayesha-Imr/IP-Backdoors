@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -34,6 +35,11 @@ def _build_prompt(tokenizer, system_prompt: str, user_query: str) -> str:
 def _load_llm(model_id: str, tensor_parallel_size: int, hf_token: str | None):
     """Load vLLM with requested tensor_parallel_size, falling back to smaller values if incompatible."""
     from vllm import LLM
+
+    if hf_token:
+        os.environ["HF_TOKEN"] = hf_token
+        os.environ["HUGGING_FACE_HUB_TOKEN"] = hf_token
+
     candidates = sorted({tensor_parallel_size, min(tensor_parallel_size, 2), 1}, reverse=True)
     for tp in candidates:
         try:
@@ -90,14 +96,7 @@ def run_pair(
 
     log.info("[%s] Loading model: %s", pair.pair_id, pair.fixed_ip_model_id)
     import torch
-    llm = LLM(
-        model=pair.fixed_ip_model_id,
-        tokenizer=pair.fixed_ip_model_id,
-        dtype="float16",
-        gpu_memory_utilization=0.90,
-        trust_remote_code=True,
-        **({"tokenizer_mode": "auto"} if hf_token else {}),
-    )
+    llm = _load_llm(pair.fixed_ip_model_id, tensor_parallel_size, hf_token)
 
     tokenizer = AutoTokenizer.from_pretrained(
         pair.fixed_ip_model_id,

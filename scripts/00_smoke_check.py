@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -31,6 +32,10 @@ def smoke_pair(pair: PairConfig, hf_token: str | None, tensor_parallel_size: int
         raise ImportError("vllm and transformers required")
 
     import torch
+
+    if hf_token:
+        os.environ["HF_TOKEN"] = hf_token
+        os.environ["HUGGING_FACE_HUB_TOKEN"] = hf_token
 
     print(f"\n{'='*60}")
     print(f"Pair: {pair.pair_id}")
@@ -84,7 +89,7 @@ def smoke_pair(pair: PairConfig, hf_token: str | None, tensor_parallel_size: int
 def main() -> None:
     parser = argparse.ArgumentParser(description="Smoke check")
     parser.add_argument("--pairs", nargs="*", help="Pair IDs to check (default: all 5)")
-    parser.add_argument("--hf-token", default=None)
+    parser.add_argument("--hf-token", default=os.environ.get("HF_TOKEN"))
     parser.add_argument("--tensor-parallel-size", type=int, default=1, metavar="N",
                         help="Number of GPUs for tensor parallelism (default: 1).")
     parser.add_argument("--verbose", action="store_true")
