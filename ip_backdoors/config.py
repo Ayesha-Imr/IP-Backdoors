@@ -20,7 +20,7 @@ EVAL_INDICES = range(200, 300)   # 100 UltraChat queries, disjoint from IP-Cross
 GEN_PARAMS = {
     "temperature": 0.7,
     "top_p": 1,
-    "max_new_tokens": 256,
+    "max_new_tokens": 512,
     "seed": 42,
 }
 
