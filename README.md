@@ -1,0 +1,1 @@
+Measuring how "leaky" the backdoors created by Inoculation Prompting are: when an inoculation prompt trains a model to suppress a trait, how many partial or semantically adjacent variants of that prompt still activate it?

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Results & data (large files)
+results/
+data/precomputed/
+*.pt
+*.jsonl
+*.csv
+
+# Env
+.env
+*.env
+
+# OS
+.DS_Store
