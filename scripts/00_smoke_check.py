@@ -23,7 +23,7 @@ from ip_backdoors.config import PAIRS, PAIRS_BY_ID, PairConfig
 log = logging.getLogger(__name__)
 
 
-def smoke_pair(pair: PairConfig, hf_token: str | None) -> None:
+def smoke_pair(pair: PairConfig, hf_token: str | None, tensor_parallel_size: int = 1) -> None:
     try:
         from vllm import LLM, SamplingParams
         from transformers import AutoTokenizer
@@ -44,6 +44,7 @@ def smoke_pair(pair: PairConfig, hf_token: str | None) -> None:
         gpu_memory_utilization=0.85,
         trust_remote_code=True,
         max_model_len=1024,
+        tensor_parallel_size=tensor_parallel_size,
     )
     tokenizer = AutoTokenizer.from_pretrained(
         pair.fixed_ip_model_id,
@@ -84,6 +85,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Smoke check")
     parser.add_argument("--pairs", nargs="*", help="Pair IDs to check (default: all 5)")
     parser.add_argument("--hf-token", default=None)
+    parser.add_argument("--tensor-parallel-size", type=int, default=1, metavar="N",
+                        help="Number of GPUs for tensor parallelism (default: 1).")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
 
@@ -97,7 +100,7 @@ def main() -> None:
     print(f"Smoke-checking {len(pairs)} pair(s): {[p.pair_id for p in pairs]}")
 
     for pair in pairs:
-        smoke_pair(pair, args.hf_token)
+        smoke_pair(pair, args.hf_token, args.tensor_parallel_size)
 
     print("\nSmoke check complete.")
 

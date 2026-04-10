@@ -73,6 +73,9 @@ def main() -> None:
     parser.add_argument("--n-queries", type=int, default=len(EVAL_INDICES),
                         help=f"Number of queries per condition (default: {len(EVAL_INDICES)})")
     parser.add_argument("--hf-token", default=None)
+    parser.add_argument("--tensor-parallel-size", type=int, default=1, metavar="N",
+                        help="Number of GPUs for tensor parallelism (default: 1). "
+                             "Falls back to 2 then 1 if N is incompatible with the model.")
     parser.add_argument("--smoke", action="store_true",
                         help="Smoke mode: run 5 queries, skip preflight confirmation")
     parser.add_argument("--output-dir", type=Path, default=RESULTS_DIR / "responses")
@@ -114,6 +117,7 @@ def main() -> None:
             out_path=out_path,
             gen_params=gen_params,
             hf_token=args.hf_token,
+            tensor_parallel_size=args.tensor_parallel_size,
         )
 
     log.info("=== Generation complete. Outputs in %s ===", args.output_dir)

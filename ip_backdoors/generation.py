@@ -31,6 +31,32 @@ def _build_prompt(tokenizer, system_prompt: str, user_query: str) -> str:
     )
 
 
+def _load_llm(model_id: str, tensor_parallel_size: int, hf_token: str | None):
+    """Load vLLM with requested tensor_parallel_size, falling back to smaller values if incompatible."""
+    from vllm import LLM
+    candidates = sorted({tensor_parallel_size, min(tensor_parallel_size, 2), 1}, reverse=True)
+    for tp in candidates:
+        try:
+            log.info("Trying tensor_parallel_size=%d …", tp)
+            llm = LLM(
+                model=model_id,
+                tokenizer=model_id,
+                dtype="float16",
+                gpu_memory_utilization=0.90,
+                trust_remote_code=True,
+                tensor_parallel_size=tp,
+                **({
+                    "tokenizer_mode": "auto"
+                } if hf_token else {}),
+            )
+            if tp != tensor_parallel_size:
+                log.warning("Fell back to tensor_parallel_size=%d (requested %d was incompatible).", tp, tensor_parallel_size)
+            return llm
+        except Exception as e:
+            log.warning("tensor_parallel_size=%d failed (%s), trying smaller …", tp, e)
+    raise RuntimeError("Could not load model with any tensor_parallel_size.")
+
+
 def run_pair(
     pair, # PairConfig
     conditions: list[tuple[str, str]],  # from ablation.build_conditions()
@@ -38,6 +64,7 @@ def run_pair(
     out_path: Path,
     gen_params: dict,
     hf_token: str | None = None,
+    tensor_parallel_size: int = 1,
 ) -> None:
     """Generate all conditions × queries for one pair; write JSONL to out_path.
 
