@@ -1,0 +1,6 @@
+pair_id,neg_trait,n_ablations,leakiness_v1,mean_neg_full,mean_neg_empty,mean_neg_neutral
+monotone_enthusiasm,enthusiasm,5,0.8,84.1,40.0,37.6
+brevity_enthusiasm,enthusiasm,5,0.8,81.9,39.0,37.8
+sarcasm_paranoia,paranoia,5,0.8,39.6,1.1,1.5
+informal_assertiveness,assertiveness,5,0.6,73.3,69.1,67.6
+poetic_mathematical,mathematical,5,0.6,32.5,13.6,13.3
