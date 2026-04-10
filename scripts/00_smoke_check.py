@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from ip_backdoors.config import PAIRS, PAIRS_BY_ID, PairConfig
-from ip_backdoors.generation import _build_prompt, adapter_info, download_adapters
+from ip_backdoors.generation import _build_prompt, _lora_request, adapter_info, download_adapters
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +48,6 @@ def main() -> None:
 
     # Step 2: load base model once
     from vllm import LLM, SamplingParams
-    from vllm.lora.request import LoRARequest
     from transformers import AutoTokenizer
     import torch
 
@@ -80,11 +79,7 @@ def main() -> None:
         print(f"IP prompt: {pair.inoculation_prompt!r}")
         print(f"{'='*60}")
 
-        lora_request = LoRARequest(
-            lora_name=pair.pair_id,
-            lora_int_id=lora_int_id,
-            lora_local_path=str(adapter_paths[pair.pair_id]),
-        )
+        lora_request = _lora_request(pair.pair_id, lora_int_id, str(adapter_paths[pair.pair_id]))
 
         conditions = [
             ("FULL IP PROMPT",   pair.inoculation_prompt),

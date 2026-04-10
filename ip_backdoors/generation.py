@@ -83,6 +83,18 @@ def _build_prompt(tokenizer, system_prompt: str, user_query: str) -> str:
 # Generation
 # ---------------------------------------------------------------------------
 
+def _lora_request(lora_name: str, lora_int_id: int, lora_path: str):
+    """Construct a LoRARequest, compatible with both old and new vLLM APIs.
+
+    vLLM < 0.6:  LoRARequest(name, int_id, lora_local_path=...)
+    vLLM >= 0.6: LoRARequest(name, int_id, lora_path=...)
+
+    Passing the path positionally avoids the kwarg rename entirely.
+    """
+    from vllm.lora.request import LoRARequest
+    return LoRARequest(lora_name, lora_int_id, lora_path)
+
+
 def run_all_pairs(
     pairs,
     conditions_per_pair: dict[str, list[tuple[str, str]]],
@@ -100,7 +112,6 @@ def run_all_pairs(
     Resume-safe: skips pairs whose output file already has the expected line count.
     """
     from vllm import LLM, SamplingParams
-    from vllm.lora.request import LoRARequest
     from transformers import AutoTokenizer
     import torch
 
@@ -149,11 +160,7 @@ def run_all_pairs(
                 continue
             log.warning("[%s] partial output (%d/%d) — regenerating.", pair.pair_id, existing, expected)
 
-        lora_request = LoRARequest(
-            lora_name=pair.pair_id,
-            lora_int_id=lora_int_id,
-            lora_local_path=str(adapter_paths[pair.pair_id]),
-        )
+        lora_request = _lora_request(pair.pair_id, lora_int_id, str(adapter_paths[pair.pair_id]))
 
         job_meta: list[dict] = []
         prompt_strings: list[str] = []
