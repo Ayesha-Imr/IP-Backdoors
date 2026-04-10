@@ -102,24 +102,28 @@ def main() -> None:
             print("\nAborted.")
             sys.exit(0)
 
-    from ip_backdoors.generation import run_pair
+    from ip_backdoors.generation import download_adapters, run_all_pairs
 
-    gen_params = dict(GEN_PARAMS)
+    ADAPTER_CACHE = ROOT / "data" / "adapters"
 
-    for i, pair in enumerate(pairs, 1):
-        conditions = build_conditions(pair.inoculation_prompt)
-        out_path = args.output_dir / f"{pair.pair_id}.jsonl"
-        log.info("[%d/%d] %s — %d conditions × %d queries = %d jobs",
-                 i, len(pairs), pair.pair_id, len(conditions), len(queries), len(conditions) * len(queries))
-        run_pair(
-            pair=pair,
-            conditions=conditions,
-            queries=queries,
-            out_path=out_path,
-            gen_params=gen_params,
-            hf_token=args.hf_token,
-            tensor_parallel_size=args.tensor_parallel_size,
-        )
+    # Download all adapters locally before loading the base model
+    adapter_paths = download_adapters(pairs, ADAPTER_CACHE, args.hf_token)
+
+    conditions_per_pair = {
+        pair.pair_id: build_conditions(pair.inoculation_prompt)
+        for pair in pairs
+    }
+
+    run_all_pairs(
+        pairs=pairs,
+        conditions_per_pair=conditions_per_pair,
+        queries=queries,
+        out_dir=args.output_dir,
+        gen_params=dict(GEN_PARAMS),
+        adapter_paths=adapter_paths,
+        hf_token=args.hf_token,
+        tensor_parallel_size=args.tensor_parallel_size,
+    )
 
     log.info("=== Generation complete. Outputs in %s ===", args.output_dir)
 
